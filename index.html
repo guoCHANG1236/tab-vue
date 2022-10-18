@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <style>
+        ul{
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+        ul li{
+            box-sizing: border-box;
+            padding: 0;
+            float: left;
+            width: 100px;
+            height: 45px;
+            line-height: 45px;
+            list-style: none;
+            text-align: center;
+            border-top: 1px solid blue;
+            border-right: 1px solid blue;
+            cursor: pointer;
+        }
+        ul li:first-child{
+            border-left: 1px solid blue;
+        }
+        ul li.active{
+            background-color: orange;
+        }
+        #app div{
+            display: none;
+        }
+        #app .current{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li @click=change(index) :class="currentIndex==index?'active':''" :key= 'item.id' v-for='(item,index) in list'>{{item.title}}</li>
+        </ul>
+        <div :class="currentIndex==index?'current':''" :key= 'item.id' v-for='(item,index) in list'>
+            <img :src="item.path" >
+        </div>
+       
+    </div> 
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data:{
+                currentIndex:0,
+                list:
+                [   {
+                        id: 1,
+                        title:'apple',
+                        path:'./1.jpg'
+                    },
+                    {
+                        id: 2,
+                        title:'orange',
+                        path:'./2.jpg'
+                    },
+                    {
+                        id: 3,
+                        title:'banana',
+                        path:'./3.jpg'
+                    }
+                ]
+            },
+            methods:{
+                change:function(index){
+                    this.currentIndex = index
+                }
+            }
+
+
+        })
+
+    </script>
+</body>
+</html>
